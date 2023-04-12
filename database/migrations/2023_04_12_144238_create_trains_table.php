@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTrainsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('trains', function (Blueprint $table) {
@@ -22,19 +17,15 @@ class CreateTrainsTable extends Migration
             $table->dateTime('arrival_time');
             $table->string('train_code');
             $table->integer('number_of_cars');
-            $table->boolean('on_time')->default(true);
-            $table->boolean('canceled')->default(false);
+            $table->boolean('is_on_time')->default(true);
+            $table->boolean('is_cancelled')->default(false);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('trains');
     }
-};
+}
+

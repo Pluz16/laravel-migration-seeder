@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Train extends Model
 {
@@ -17,12 +18,21 @@ class Train extends Model
         'arrival_time',
         'train_code',
         'number_of_cars',
-        'on_time',
-        'canceled',
+        'is_on_time',
+        'is_cancelled'
     ];
 
-    protected $casts = [
-        'departure_time' => 'datetime',
-        'arrival_time' => 'datetime',
+    protected $dates = [
+        'departure_time',
+        'arrival_time',
+        'created_at',
+        'updated_at'
     ];
+
+    public function scopeDepartureToday($query)
+    {
+        $today = Carbon::now()->startOfDay();
+        return $query->where('departure_time', '>=', $today);
+    }
 }
+

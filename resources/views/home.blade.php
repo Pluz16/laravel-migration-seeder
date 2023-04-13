@@ -1,19 +1,35 @@
 @extends('layouts.app')
 
-@section('content')
-    <h1>Treni in partenza oggi</h1>
+@section('title', 'Home')
 
-    @foreach($trains as $train)
-        <div>
-            <p>Azienda: {{ $train->company }}</p>
-            <p>Partenza: {{ $train->departure_station }}</p>
-            <p>Destinazione: {{ $train->arrival_station }}</p>
-            <p>Orario di partenza: {{ $train->departure_time->format('d/m/Y H:i') }}</p>
-            <p>Orario di arrivo: {{ $train->arrival_time->format('d/m/Y H:i') }}</p>
-            <p>Codice treno: {{ $train->train_code }}</p>
-            <p>Numero carrozze: {{ $train->number_of_cars }}</p>
-            <hr>
-        </div>
-    @endforeach
+@section('content')
+	<h1>Treni in partenza oggi</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Azienda</th>
+				<th>Stazione di partenza</th>
+				<th>Stazione di arrivo</th>
+				<th>Orario di partenza</th>
+				<th>Orario di arrivo</th>
+				<th>Codice Treno</th>
+				<th>Numero Carrozze</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach ($trains as $train)
+				<tr>
+					<td>{{ $train->company }}</td>
+					<td>{{ $train->departure_station }}</td>
+					<td>{{ $train->arrival_station }}</td>
+					<td>{{ $train->departure_time->format('H:i') }}</td>
+					<td>{{ $train->arrival_time->format('H:i') }}</td>
+					<td>{{ $train->train_code }}</td>
+					<td>{{ $train->number_of_cars }}</td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
 @endsection
+
 
